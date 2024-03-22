@@ -61,7 +61,13 @@ public class ChatController {
         }
     }
     @GetMapping("/users")
-    public ResponseEntity<Map<String, String>> getUsers() {
-        return ResponseEntity.ok(users);
+    public ResponseEntity<String> getUsers() {
+        StringBuilder userStringBuilder = new StringBuilder();
+        for (Map.Entry<String, String> entry : users.entrySet()) {
+            String userId = entry.getKey();
+            String userName = entry.getValue();
+            userStringBuilder.append(userId).append(": ").append(userName).append("\n");
+        }
+        return ResponseEntity.ok(userStringBuilder.toString());
     }
 }
